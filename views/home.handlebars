@@ -1,0 +1,15 @@
+{{#each article}}
+<div class="container">
+	<div class="panel panel-default">
+		<div class="panel-heading">Titles</div>
+			<div class="panel-body">
+				<p>{{this.title}}</p>
+				{{this.link}}
+				<form action="/saved/{{this._id}}?_method=PUT" method="POST"> 
+					<button type="submit" class="btn btn-default" style="float:right;">Save</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+{{/each}}
