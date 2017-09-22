@@ -17,7 +17,7 @@ mongoose.Promise = Promise;
 
 // Initialize Express
 var app = express();
-
+var PORT = process.env.PORT || 3000;
 // Override with POST having ?_method=DELETE
 app.use(methodOverride("_method"));
 
@@ -33,8 +33,10 @@ app.use(bodyParser.urlencoded({
 // Make public a static dir
 app.use(express.static("public"));
 
+var mongodb = process.env.MONGODB_URI || "mongodb://localhost/newyorktimes";
+
 // Database configuration with mongoose
-mongoose.connect("mongodb://localhost/newyorktimes");
+mongoose.connect(mongodb);
 var db = mongoose.connection;
 
 // Show any mongoose errors
@@ -219,8 +221,8 @@ app.put("/notes/:id", function(req, res) {
 
 
 // Listen on port 3000
-app.listen(3000, function() {
-    console.log("App running on port 3000!");
+app.listen(PORT, function() {
+    console.log("App running on port %s!", PORT);
 });
 
 
